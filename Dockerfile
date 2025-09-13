@@ -38,9 +38,15 @@ COPY . .
 # Puerto expuesto (Render usa el puerto definido en la variable de entorno PORT)
 EXPOSE $PORT
 
+# Asegurar que el directorio de datos tenga los permisos correctos
+RUN mkdir -p /app/data && \
+    chown -R appuser:appuser /app
+
 # Usar un usuario no root para mayor seguridad
-RUN useradd -m appuser && chown -R appuser:appuser /app
 USER appuser
+
+# Crear directorio de datos con el usuario appuser
+RUN mkdir -p /app/data
 
 # Comando para ejecutar la aplicación con el puerto correcto para Render
 # Usando shell form para que la variable de entorno se expanda correctamente

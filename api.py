@@ -21,14 +21,26 @@ app.add_middleware(
 )
 
 # Rutas de archivos
-MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
+MODEL_DIR = '/app/data'  # Usar ruta absoluta consistente
 MODEL_PATH = os.path.join(MODEL_DIR, 'model.pkl')
 
-# Asegurarse de que el directorio de datos existe
-os.makedirs(MODEL_DIR, exist_ok=True)
-
+# Verificar que el modelo existe
 if not os.path.isfile(MODEL_PATH):
-    raise RuntimeError(f"Modelo no encontrado en {MODEL_PATH}. Entrena y guarda model.pkl en data/")
+    error_msg = f"""
+    Error: No se encontró el archivo del modelo en {MODEL_PATH}.
+    Asegúrate de que el archivo model.pkl existe en el directorio data/
+    y que se copia correctamente durante la construcción de la imagen Docker.
+    """
+    raise RuntimeError(error_msg)
+
+# Cargar el modelo
+print(f"Cargando modelo desde: {MODEL_PATH}")
+try:
+    model = joblib.load(MODEL_PATH)
+    print("Modelo cargado exitosamente")
+except Exception as e:
+    print(f"Error al cargar el modelo: {str(e)}")
+    raise
 
 model = joblib.load(MODEL_PATH)
 print("Modelo cargado:", model)
