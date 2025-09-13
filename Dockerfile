@@ -43,4 +43,5 @@ RUN useradd -m appuser && chown -R appuser:appuser /app
 USER appuser
 
 # Comando para ejecutar la aplicación con el puerto correcto para Render
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "$PORT"]
+# Usando shell form para que la variable de entorno se expanda correctamente
+CMD exec uvicorn api:app --host 0.0.0.0 --port $PORT
