@@ -1,0 +1,15 @@
+# Configuración para desplegar en Render
+services:
+  - type: web
+    name: asl-recognition
+    env: docker
+    plan: free  # o 'standard' para producción
+    region: oregon  # o la región más cercana a ti
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PORT
+        value: "10000"
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true  # Despliegue automático al hacer push a tu repositorio
+    healthCheckPath: /docs  # Ruta para verificar que la API está funcionando

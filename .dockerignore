@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Archivos de datos grandes
+*.pkl
+*.csv
+*.jpg
+*.jpeg
+*.png
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Archivos de desarrollo local
+.env
+.env.local
+
+# Archivos de Docker
+Dockerfile
+.dockerignore
+
+# Archivos de Git
+.git/
+.gitignore
