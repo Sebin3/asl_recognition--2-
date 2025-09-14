@@ -3,3 +3,5 @@ uvicorn
 numpy
 joblib
 scikit-learn
+opencv-python
+mediapipe
